@@ -23,6 +23,7 @@ router.get('/subscriptions', requireAuth, (req, res) => {
 
   res.json({
     accounts: (user.googleAccounts || []).map(a => ({ address: a.address, connectedAt: a.connectedAt, lastSyncAt: a.lastSyncAt })),
+    user: { firstName: user.firstName, lastName: user.lastName, email: user.id },
     realizedYearly: cancelled.reduce((s, x) => s + annualValue(x), 0),
     potentialMonthly: active.reduce((s, x) => s + monthlyValue(x), 0),
     cancelledCount: cancelled.length,
